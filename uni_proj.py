@@ -1,60 +1,54 @@
+import os
+
 class student():
 
     def __init__(self,item):
-        self.i = item
+        self.fname = item
+        
 
     def first_name(self,item):
         self.firstName = item
-        fileName = 'studen{}.txt'
-        f = open(fileName.format(self.i),'w')
+        f = open(self.fname,'x')
         f.write(self.firstName + '\n')
 
     def last_name(self,item):
         self.lastName = item
-        fileName = 'studen{}.txt'
-        f = open(fileName.format(self.i),'a')
+        f = open(self.fname,'a')
         f.write(self.lastName + '\n')
 
     def father_name(self,item):
-        self.fatherName = item
-        fileName = 'studen{}.txt'
-        f = open(fileName.format(self.i),'a')
+        self.fatherName = item    
+        f = open(self.fname,'a')
         f.write(self.fatherName + '\n')
 
     def national_code(self,item):
-        self.nationalCode = item
-        fileName = 'studen{}.txt'
-        f = open(fileName.format(self.i),'a')
+        self.nationalCode = item      
+        f = open(self.fname,'a')
         f.write(self.nationalCode + "\n")
         
     def address(self,item):
-        self.Address = item
-        fileName = 'studen{}.txt'
-        f = open(fileName.format(self.i),'a')
+        self.Address = item    
+        f = open(self.fname,'a')
         f.write(self.Address + '\n')
 
     def phone_number(self,item):
-        self.phoneNumber = item
-        fileName = 'studen{}.txt'
-        f = open(fileName.format(self.i),'a')
+        self.phoneNumber = item    
+        f = open(self.fname,'a')
         f.write(self.phoneNumber + '\n')
 
     def user_name(self,item):
         self.userName = item
-        fileName = 'studen{}.txt'
-        f = open(fileName.format(self.i),'a')
+        f = open(self.fname,'a')
         f.write(self.userName + '\n')
         
     def password(self,item):
         self.Password = item
-        fileName = 'studen{}.txt'
-        f = open(fileName.format(self.i),'a')
+        f = open(self.fname,'a')
         f.write(self.Password + '\n')
 
     def student_code(self,item):
-        self.studentCode = item
-        fileName = 'studen{}.txt'
-        f = open(fileName.format(self.i),'a')
+        self.studentCode = item 
+        f = open(self.fname,'a')
         f.write(self.studentCode)      
     
 
@@ -90,6 +84,11 @@ class master():
 
 class education_expert():
 
+
+    def student_files(self, item):
+        f = open('studentsName.txt', 'a')
+        f.write(item + '\n')
+
     def first_name(self,item):
         self.firstName = item
 
@@ -117,12 +116,17 @@ class education_expert():
     def employee_code(self,item):
         self.employeeCode = item
     
-    def addDanshjo(self,item):
+    def addStudent(self,item):
         
         for i in range(item):
 
-            s = student(i)
+            print('please enter the new file name for keeping new information:')
+            x = str(input('use the name of new student:') + '_student.txt')
 
+            self.student_files(x)
+
+            s = student(x)
+            
             print('please enter the information of new student:')
 
             s.first_name(input('Name:'))
@@ -133,6 +137,17 @@ class education_expert():
             s.phone_number(input('PhoneNumber:'))
             s.user_name(input('UserName:'))
             s.password(input('Password:'))
+            s.student_code(input('StudentCode:'))
+        
+    def showStudents(self):
+        f = open('studentsName.txt','r')
+        print(f.read())
+    
+    def removeStudnet(self, item):
+        if os.path.exists(item):
+            os.remove(item)
+        else:
+            print("The file does not exist")
 
 class lesson:
 
@@ -140,11 +155,12 @@ class lesson:
         self.lessonName = item
     
     def lesson_number(self,item):
-        self.lessonNumber = item
+        self.lessonNumber = item    
 
 karshenas = education_expert()
 
-karshenas.firstName = 'ali'
-karshenas.lastName = 'alizade'
+#karshenas.addStudent(3)
 
-karshenas.addDanshjo(3)
+#karshenas.showStudents()
+
+karshenas.removeStudnet('ali_student.txt')
