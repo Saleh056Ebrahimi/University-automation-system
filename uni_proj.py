@@ -1,4 +1,6 @@
 import os
+import sys
+import fileinput
 
 class student():
 
@@ -220,6 +222,23 @@ class education_expert():
             l.lesson_name(input('Lesson name:'))
             l.lesson_number(input('Lesson number:'))
 
+    def change(self, item):
+        
+        print ("enter Text to search for:")
+        textToSearch = input( "> " )
+
+        print ("Text to replace it with:")
+        textToReplace = input( "> " )
+
+        print ("File to perform Search-Replace on:")
+        fileToSearch  = item
+        #fileToSearch = 'D:\dummy1.txt'
+
+        tempFile = open( fileToSearch, 'r+' )
+
+        for line in fileinput.input( fileToSearch ):
+            tempFile.write( line.replace( textToSearch, textToReplace ) )
+        tempFile.close()
 
 class lesson:
 
@@ -251,5 +270,7 @@ karshenas = education_expert()
 #karshenas.showMasters()
 
 #karshenas.removeMaster('iman_master.txt')
+
+#karshenas.change('demo.txt')
 
 #s1 = student('ali')
