@@ -10,47 +10,47 @@ class student():
     def first_name(self,item):
         self.firstName = item
         f = open(self.fname,'x')
-        f.write(self.firstName + '\n')
+        f.write('FirstName:' + self.firstName + '\n')
 
     def last_name(self,item):
         self.lastName = item
         f = open(self.fname,'a')
-        f.write(self.lastName + '\n')
+        f.write('LastName:' + self.lastName + '\n')
 
     def father_name(self,item):
         self.fatherName = item    
         f = open(self.fname,'a')
-        f.write(self.fatherName + '\n')
+        f.write('FatherName:' + self.fatherName + '\n')
 
     def national_code(self,item):
         self.nationalCode = item      
         f = open(self.fname,'a')
-        f.write(self.nationalCode + "\n")
+        f.write('NationalCode:' +self.nationalCode + "\n")
         
     def address(self,item):
         self.Address = item    
         f = open(self.fname,'a')
-        f.write(self.Address + '\n')
+        f.write('Address:' +self.Address + '\n')
 
     def phone_number(self,item):
         self.phoneNumber = item    
         f = open(self.fname,'a')
-        f.write(self.phoneNumber + '\n')
+        f.write('PhoneNumber:' +self.phoneNumber + '\n')
 
     def user_name(self,item):
         self.userName = item
         f = open(self.fname,'a')
-        f.write(self.userName + '\n')
+        f.write('UserName:' +self.userName + '\n')
         
     def password(self,item):
         self.Password = item
         f = open(self.fname,'a')
-        f.write(self.Password + '\n')
+        f.write('Password:' +self.Password + '\n')
 
     def student_code(self,item):
         self.studentCode = item 
         f = open(self.fname,'a')
-        f.write(self.studentCode)      
+        f.write('StudentCode:' +self.studentCode)      
     
 
 class master():
@@ -61,47 +61,47 @@ class master():
     def first_name(self,item):
         self.firstName = item
         f = open(self.fname,'x')
-        f.write(self.firstName + '\n')
+        f.write('FirstName:' +self.firstName + '\n')
 
     def last_name(self,item):
         self.lastName = item
         f = open(self.fname,'a')
-        f.write(self.lastName + '\n')
+        f.write('LastName:' +self.lastName + '\n')
 
     def father_name(self,item):
         self.fatherName = item
         f = open(self.fname,'a')
-        f.write(self.fatherName + '\n')
+        f.write('FatherName:' +self.fatherName + '\n')
     
     def national_code(self,item):
         self.nationalCode = item
         f = open(self.fname,'a')
-        f.write(self.nationalCode + "\n")
+        f.write('NationalCode:' +self.nationalCode + "\n")
     
     def address(self,item):
         self.Address = item
         f = open(self.fname,'a')
-        f.write(self.Address + '\n')
+        f.write('Address:' +self.Address + '\n')
 
     def phone_number(self,item):
         self.phoneNumber = item
         f = open(self.fname,'a')
-        f.write(self.phoneNumber + '\n')
+        f.write('PhoneNumber:' +self.phoneNumber + '\n')
 
     def user_name(self,item):
         self.userName = item
         f = open(self.fname,'a')
-        f.write(self.userName + '\n')
+        f.write('UserName:' +self.userName + '\n')
     
     def password(self,item):
         self.Password = item
         f = open(self.fname,'a')
-        f.write(self.Password + '\n')
+        f.write('Password:' +self.Password + '\n')
     
-    def instructor_number(self,item):
-        self.instructorNumber = item
+    def instructor_code(self,item):
+        self.instructorCode = item
         f = open(self.fname,'a')
-        f.write(self.instructorNumber)   
+        f.write('InstructorCode:' +self.instructorCode)   
 
 
 class education_expert():
@@ -113,6 +113,10 @@ class education_expert():
 
     def masters_file(self, item):
         f = open('mastersName.txt', 'a')
+        f.write(item + '\n')
+
+    def lesssons_file(self, item):
+        f = open('lessons.txt', 'a')
         f.write(item + '\n')
 
     def first_name(self,item):
@@ -186,7 +190,7 @@ class education_expert():
             s.phone_number(input('PhoneNumber:'))
             s.user_name(input('UserName:'))
             s.password(input('Password:'))
-            s.instructor_number(input('InstructorNumber:'))
+            s.instructor_code(input('InstructorCode:'))
 
     def showStudents(self):
         
@@ -217,6 +221,8 @@ class education_expert():
             print('please enter the new file name for keeping new information:')
             x = str(input('use the name of new lesson:') + '_lesson.txt')
 
+            self.lesssons_file(x)
+
             l = lesson(x)
 
             l.lesson_name(input('Lesson name:'))
@@ -230,15 +236,38 @@ class education_expert():
         print ("Text to replace it with:")
         textToReplace = input( "> " )
 
-        print ("File to perform Search-Replace on:")
+        #print ("File to perform Search-Replace on:")
         fileToSearch  = item
-        #fileToSearch = 'D:\dummy1.txt'
 
         tempFile = open( fileToSearch, 'r+' )
 
         for line in fileinput.input( fileToSearch ):
-            tempFile.write( line.replace( textToSearch, textToReplace ) )
+
+                tempFile.write( line.replace( textToSearch, textToReplace ) )
+
         tempFile.close()
+
+
+    def addLessonForMaster(self, item):
+        self.masterfile = item
+        f1 = open(self.masterfile,'r')
+
+        for line in f1:
+            if 'InstructorCode' in line:
+                l = line.split(':')
+                lst = LessonsOfMaster(l[1])
+
+        f1.close()
+
+        name = self.masterfile.split('.')
+
+        f3 = open(name[0] + '_lessons.txt','w')
+        for i in lst:
+            f3.write(i)
+
+        
+        
+                
 
 class lesson:
 
@@ -248,29 +277,48 @@ class lesson:
     def lesson_name(self,item):
         self.lessonName = item
         f = open(self.fname,'x')
-        f.write(self.lessonName + '\n')
+        f.write('LessonName:'+ self.lessonName + '\n')
     
     def lesson_number(self,item):
         self.lessonNumber = item
         f = open(self.fname,'a')
-        f.write(self.lessonNumber)
+        f.write('LessonNumber:' +self.lessonNumber)
+
+def LessonsOfMaster(item):
+    mastercode = list(item)
+    lessonlist = []
+    mydict = {}
+    f = open('lessons.txt','r')
+    for line1 in f:
+        m = line1.split('\n')    
+        l = open(m[0],'r')
+        for line2 in l:
+            n = line2.split(':')
+            mydict.update({n[0] : n[1]})
+        if mydict['LessonNumber'] in mastercode:
+            lessonlist.append(mydict['LessonName'])        
+     
+    return lessonlist
+
 
 karshenas = education_expert()
 
-#karshenas.addStudent(2)
+#karshenas.addStudent(1)
 
 #karshenas.showStudents()
 
 #karshenas.removeStudnet('ali_student.txt')
 
-#karshenas.addLesson(3)
+#karshenas.addLesson(6)
 
-#karshenas.addMaster(2)
+#karshenas.addMaster(3)
 
 #karshenas.showMasters()
 
 #karshenas.removeMaster('iman_master.txt')
 
 #karshenas.change('demo.txt')
+
+karshenas.addLessonForMaster('hojat_master.txt')
 
 #s1 = student('ali')
