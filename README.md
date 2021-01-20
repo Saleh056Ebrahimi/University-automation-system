@@ -2,7 +2,7 @@
 this is a University project
 
 Performable operations:
-      education expert can :
+      >:education expert can :
              -add student
              -add master
              -add lessons
