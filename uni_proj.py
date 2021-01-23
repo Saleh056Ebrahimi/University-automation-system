@@ -39,7 +39,7 @@ class student():
 
     def user_name(self,item):
         self.userName = item
-        f = open(self.fname,'a')
+        f = open(self.fname,'a') 
         f.write('UserName:' +self.userName + '\n')
         
     def password(self,item):
@@ -53,56 +53,68 @@ class student():
         f.write('StudentCode:' +self.studentCode) 
 
     def selectUnit(self , item):
+        f = open('studentsName.txt','r')
+        found = False
+        for line in f:
+            if item in line:
+                found = True
 
-        print('These lessons are limited :')
-        print()
+        if found == False:
+            print('the student does not exist!!!')
+        else:
+            print('These lessons are limited :')
+            print()
 
-        f1 = open('mastersName.txt','r')
-        for i in f1:
-            n = i.split('.')
-            f2 = open(n[0]+ '_lessons.txt','r')
-            nn = n[0].split('_')
-            print(nn[0],': ')
-            for line in f2:
-                print('\t'+line,end = '')
+            f1 = open('mastersName.txt','r')
+            for i in f1:
+                n = i.split('.')
+                f2 = open(n[0]+ '_lessons.txt','r')
+                nn = n[0].split('_')
+                print(nn[0],': ')
+                for line in f2:
+                    print('\t'+line,end = '')
 
 
 
-        print()
-        print('----------')
-        print('for select units you have to first choice lesson name and then choice masnter name')
-        print('select lessons:')
+            print()
+            print('----------')
+            print('for select units you have to first choice lesson name and then choice masnter name')
+            print('select lessons:')
 
-        check = 'yes'
-        lst = {}
-        while check == 'yes':
-            print('enter the lesson name :')
-            l = input('>')
-            print('enter the master name :')
-            m = input('>')
+            check = 'yes'
+            lst = {}
+            while check == 'yes':
+                print('enter the lesson name :')
+                les = input('>')
+                f5 = open('lessons.txt','r')
+                for line1 in f5:
+                    l1 = line1.split('_')
+                    if les == l1[0]:
+                        print('enter the master name :')
+                        mas = input('>')
+                        f6 = open('mastersName.txt','r')
+                        for line2 in f6:
+                            l2 = line2.split('_')
+                            if mas == l2[0]:
+                                lst[les] = mas
+                                print('do you still want to continue?') 
+                                print('for continue enter yes else enter no :')
+                                check = input('>')
+
+            print('------------')
+            fname = item.split('_')
+            f3 = open(fname[0] + '_lessons.txt','x')
             
-            lst[l] = m
+            keys = []
+            vals = []
+            
+            for i in lst.keys():
+                keys.append(i)
+            for i in lst.values():
+                vals.append(i)
 
-            print('do you still want to continue?') 
-            print('for continue enter yes else enter no :')
-            check = input('>')
-
-        print('------------')
-        
-
-        fname = item.split('_')
-        f3 = open(fname[0] + '_lessons.txt','x')
-        
-        keys = []
-        vals = []
-        
-        for i in lst.keys():
-            keys.append(i)
-        for i in lst.values():
-            vals.append(i)
-
-        for i in range(len(lst)):
-            f3.write(keys[i]+' : '+vals[i]+'\n')  
+            for i in range(len(lst)):
+                f3.write(keys[i]+' : '+vals[i]+'\n')  
         
 class master():
 
