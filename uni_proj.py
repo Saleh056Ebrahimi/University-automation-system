@@ -50,9 +50,60 @@ class student():
     def student_code(self,item):
         self.studentCode = item 
         f = open(self.fname,'a')
-        f.write('StudentCode:' +self.studentCode)      
-    
+        f.write('StudentCode:' +self.studentCode) 
 
+    def selectUnit(self , item):
+
+        print('These lessons are limited :')
+        print()
+
+        f1 = open('mastersName.txt','r')
+        for i in f1:
+            n = i.split('.')
+            f2 = open(n[0]+ '_lessons.txt','r')
+            nn = n[0].split('_')
+            print(nn[0],': ')
+            for line in f2:
+                print('\t'+line,end = '')
+
+
+
+        print()
+        print('----------')
+        print('for select units you have to first choice lesson name and then choice masnter name')
+        print('select lessons:')
+
+        check = 'yes'
+        lst = {}
+        while check == 'yes':
+            print('enter the lesson name :')
+            l = input('>')
+            print('enter the master name :')
+            m = input('>')
+            
+            lst[l] = m
+
+            print('do you still want to continue?') 
+            print('for continue enter yes else enter no :')
+            check = input('>')
+
+        print('------------')
+        
+
+        fname = item.split('_')
+        f3 = open(fname[0] + '_lessons.txt','x')
+        
+        keys = []
+        vals = []
+        
+        for i in lst.keys():
+            keys.append(i)
+        for i in lst.values():
+            vals.append(i)
+
+        for i in range(len(lst)):
+            f3.write(keys[i]+' : '+vals[i]+'\n')  
+        
 class master():
 
     def file_name(self,item):
@@ -301,7 +352,7 @@ def LessonsOfMaster(item):
     return lessonlist
 
 
-karshenas = education_expert()
+#karshenas = education_expert()
 
 #karshenas.addStudent(1)
 
@@ -311,7 +362,7 @@ karshenas = education_expert()
 
 #karshenas.addLesson(6)
 
-#karshenas.addMaster(3)
+#karshenas.addMaster(4)
 
 #karshenas.showMasters()
 
@@ -319,6 +370,8 @@ karshenas = education_expert()
 
 #karshenas.change('demo.txt')
 
-karshenas.addLessonForMaster('hojat_master.txt')
+#karshenas.addLessonForMaster('hasan_master.txt')
 
-#s1 = student('ali')
+s1 = student()
+
+s1.selectUnit('ali_student.txt')
