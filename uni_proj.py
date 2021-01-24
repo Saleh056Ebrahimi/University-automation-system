@@ -164,8 +164,51 @@ class master():
     def instructor_code(self,item):
         self.instructorCode = item
         f = open(self.fname,'a')
-        f.write('InstructorCode:' +self.instructorCode)   
+        f.write('InstructorCode:' +self.instructorCode)
 
+    def showStudentsAndGrade(self, masterName):
+        n = masterName.split('_')
+        name = n[0]
+        lst_for_students = []
+        f = open('mastersName.txt','r')
+        for line1 in f:
+            if masterName in line1:
+                newMasterName = masterName.split('.')
+                f1 = open(newMasterName[0]+'_lessons.txt','r')
+                print('these are the lessons of master :')
+                print()
+                for line2 in f1:     
+                    print(line2,end='')
+                print('------------------')
+                print('if you want to see students of one lesson shoice one lesson.')
+                print()
+                lessonEntered = input('>:')
+                f2 = open('studentsName.txt','r')
+                for line3 in f2:
+                    splitedLine = line3.split('_')
+                    studentName = splitedLine[0]
+                    f3 = open(studentName+'_lessons.txt','r')
+                    for studnetLessons in f3:
+                        lst = studnetLessons.split(':')
+                        if lessonEntered in lst[0] and name in lst[1]:
+                            lst_for_students.append(studentName)
+                            print(studentName)
+        print('--------------')
+        print('Do you want to give a student a grade?')
+        print('if you want enter "yes".')
+        check = input('>:')
+        while check == 'yes':
+            studentNameForGrade = input('enter the student name :')
+            for stud in lst_for_students:
+                if studentNameForGrade == stud:
+                    mark = input('print the mark of ' + studentNameForGrade + ':')
+                    f4 = open('marks_of_' + studentNameForGrade + '.txt','a')
+                    f4.write(lessonEntered+':' + mark + '\n')
+            print('If you want to continue enter "yes".')
+            check = input('>:')
+                
+
+                        
 
 class education_expert():
 
@@ -384,6 +427,11 @@ def LessonsOfMaster(item):
 
 #karshenas.addLessonForMaster('hasan_master.txt')
 
-s1 = student()
+#s = student()
 
-s1.selectUnit('ali_student.txt')
+#s.selectUnit('saleh_student.txt')
+
+m = master()
+
+m.showStudentsAndGrade('iman_master.txt')
+
