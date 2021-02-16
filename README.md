@@ -11,4 +11,3 @@ Performable operations:
                    -remove student
                    -remove master
                    -remove lesson
-      
