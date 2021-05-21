@@ -434,4 +434,3 @@ def LessonsOfMaster(item):
 m = master()
 
 m.showStudentsAndGrade('iman_master.txt')
-
